@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Profile</title>
+    <style>
+        /* Background image */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.pexels.com/photos/1334312/pexels-photo-1334312.jpeg?cs=srgb&dl=pexels-designstrive-1334312.jpg&fm=jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* Title Header (Green Grocer) */
+        .header {
+            background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+        }
+
+        nav a:hover {
+            background-color: #3a8e3a;
+            border-radius: 4px;
+        }
+
+        /* Container for Farmer Profile Form */
+        .container {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8); /* White background with some transparency */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            background-color: #2e7d32;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        form {
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        input[type="text"], input[type="tel"], input[type="email"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #bdbdbd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #2e7d32;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #2e7d32;
+            color: white;
+            margin-top: 20px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 30px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Title Header (Green Grocer) -->
+<div class="header">
+    Green Grocer
+</div>
+
+<!-- Navigation Bar -->
+<nav>
+    <a href="./index.html">Home</a>
+    <a href="./shop.html">Shop</a>
+    <a href="./about.html">About Us</a>
+    <a href="./contact.html">Contact Us</a>
+    <a href="./farmer_profile.html">Farmer Profile</a>
+</nav>
+
+<div class="container">
+    <h2>Farmer Profile</h2>
+    <form onsubmit="redirectToDashboard(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" placeholder="Enter your state" required>
+
+        <label for="district">District:</label>
+        <input type="text" id="district" name="district" placeholder="Enter your district" required>
+
+        <label for="village">Village:</label>
+        <input type="text" id="village" name="village" placeholder="Enter your village" required>
+
+        <label for="post">Post:</label>
+        <input type="text" id="post" name="post" placeholder="Enter your post" required>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+
+        <label for="email">Mail ID:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+        <label for="products">Products Available:</label>
+        <textarea id="products" name="products" rows="4" placeholder="List your products and their availability..." required></textarea>
+
+        <button type="submit">Submit Profile</button>
+    </form>
+</div>
+
+<div class="footer">
+    &copy; 2024 Green Grocer. All Rights Reserved.
+</div>
+
+<script>
+    function redirectToDashboard(event) {
+        event.preventDefault(); // Prevent form from actually submitting
+        window.location.href = "account.html"; // Redirect to the dashboard page
+    }
+</script>
+
+</body>
+</html>

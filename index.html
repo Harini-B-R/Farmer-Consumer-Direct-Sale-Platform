@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Grocer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add background image for the whole page */
+        body {
+            background-image: url('https://images.pexels.com/photos/1334312/pexels-photo-1334312.jpeg?cs=srgb&dl=pexels-designstrive-1334312.jpg&fm=jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Styling header and navigation */
+        header {
+            background-color: rgba(0, 0, 0, 0.6); /* dark background for header */
+            padding: 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2em;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            text-decoration:none;  /* Underline on hover */
+            color: #4CAF50;  /* Green color on hover */
+        }
+
+        /* Banner styling */
+        #banner {
+            text-align: center;
+            color: white;
+            padding: 50px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #banner h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        button a {
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        /* Description section */
+        #description {
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9); /* light background */
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        #description h3 {
+            color: #2d6a4f;
+            font-size: 2em;
+        }
+
+        #description p {
+            color: #333;
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Categories section */
+        #categories {
+            text-align: center;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        #categories h3 {
+            color: #2d6a4f;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .category-item {
+            background-color: rgba(76, 175, 80, 0.3); /* Transparent green background */
+            margin: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            width: 45%;
+            box-sizing: border-box;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .category-item h1 {
+            text-align: center;
+            color: #2d6a4f;
+        }
+
+        .category-item ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .category-item ul li {
+            color: #333;
+            font-size: 1.1em;
+            padding: 10px;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover effect for list items */
+        .category-item ul li:hover {
+            background-color: #2d6a4f; /* Green background on hover */
+            color: white; /* White text color on hover */
+        }
+
+        /* Tooltip styling for description and rating */
+        .category-item ul li::after {
+            content: attr(data-description) " | Rating: " attr(data-rating); /* Concatenate description and rating */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Show tooltip when hovering */
+        .category-item ul li:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0); /* Show the description with a slight lift */
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            background-color: #2d6a4f;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Green Grocer</h1>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./shop.html">Shop</a>
+            <a href="./about.html">About Us</a>
+            <a href="./howitworks.html">How It Works</a>
+            <a href="./contact.html">Contact Us</a>
+            <a href="./farmer_profile.html">Farmer Profile</a>
+            <a href="./login.html">Login</a> <!-- Added Login -->
+            <a href="./register.html">Register</a> <!-- Added Register -->
+            <a href="./dashboard.html">Dashboard</a> <!-- Added Dashboard -->
+        </nav>
+    </header>
+
+    <section id="banner">
+        <h2>Fresh from the Farm to Your Table</h2>
+        <button><a href="shop.html">Shop Now</a></button>
+    </section>
+
+    <section id="description">
+        <h3>About Green Grocer</h3>
+        <p>Green Grocer is a platform that connects you directly with farmers, ensuring you get the freshest, highest-quality produce at affordable prices. Whether you're looking for fruits, vegetables, dairy, or grains, we make it easy for you to access farm-fresh products, all from the comfort of your home. Our goal is to empower local farmers and provide you with healthy, sustainable food options that support the community.</p>
+    </section>
+
+    <section id="categories">
+        <h3>Popular Categories</h3>
+        <div class="category-item">
+            <h1>Fruits</h1>
+            <ul>
+                <li class="category-list-item" data-description="Fresh and juicy seasonal fruits." data-rating="4.5/5">
+                    Watermelon
+                </li>
+                <li class="category-list-item" data-description="Crisp and sweet apples from local farms." data-rating="4.7/5">
+                    Apple
+                </li>
+                <li class="category-list-item" data-description="Tart and refreshing oranges, perfect for juice." data-rating="4.3/5">
+                    Orange
+                </li>
+                <li class="category-list-item" data-description="Tropical pineapples with a tangy flavor." data-rating="4.6/5">
+                    Pineapple
+                </li>
+                <li class="category-list-item" data-description="Sweet and fragrant mangoes." data-rating="4.8/5">
+                    Mango
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category-item">
+            <h1>Vegetables</h1>
+            <ul>
+                <li class="category-list-item" data-description="Healthy and nutritious drumsticks." data-rating="4.4/5">
+                    Drumstick
+                </li>
+                <li class="category-list-item" data-description="Fresh and ripe tomatoes for cooking." data-rating="4.6/5">
+                    Tomato
+                </li>
+                <li class="category-list-item" data-description="Sweet and pungent onions for flavor." data-rating="4.2/5">
+                    Onion
+                </li>
+                <li class="category-list-item" data-description="Earthy and starchy potatoes for versatile dishes." data-rating="4.7/5">
+                    Potato
+                </li>
+                <li class="category-list-item" data-description="Sweet and crunchy carrots for salads." data-rating="4.5/5">
+                    Carrot
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category-item">
+            <h1>Dairy</h1>
+            <ul>
+                <li class="category-list-item" data-description="Fresh, high-quality milk from local farms." data-rating="4.8/5">
+                    Milk
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category-item">
+            <h1>Grains</h1>
+            <ul>
+                <li class="category-list-item" data-description="High-quality rice for cooking." data-rating="4.6/5">
+                    Rice
+                </li>
+                <li class="category-list-item" data-description="Freshly milled wheat flour for baking." data-rating="4.7/5">
+                    Wheat
+                </li>
+                <li class="category-list-item" data-description="Nutritious barley for soups and salads." data-rating="4.4/5">
+                    Barley
+                </li>
+                <li class="category-list-item" data-description="Healthy and fiber-rich corn for breakfast." data-rating="4.8/5">
+                    Oats
+                </li>
+                <li class="category-list-item" data-description="High-protein millet, a superfood grain." data-rating="4.9/5">
+                    Quinoa
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Green Grocer. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Background image same as the homepage */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://images.pexels.com/photos/1334312/pexels-photo-1334312.jpeg?cs=srgb&dl=pexels-designstrive-1334312.jpg&fm=jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.6); /* Dark background for header */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Main content section */
+        #how-it-works {
+            background-color: rgba(255, 255, 255, 0.8); /* Slight transparent white background for readability */
+            padding: 30px;
+            border-radius: 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start; /* Align content to the left */
+            text-align: left; /* Align text to the left */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            position: relative;
+        }
+
+        #how-it-works h2 {
+            font-size: 2.5rem;
+            color: #3a8e3a; /* Green for headings */
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        #how-it-works p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            max-width: 100%;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+
+        /* Instructions section */
+        #instructions {
+            display: none; /* Initially hidden */
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: none;
+            position: relative;
+            color: #555;
+            text-align: left;
+        }
+
+        #instructions h3 {
+            font-size: 2rem;
+            color: #2d6a4f;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        #instructions p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* Help Button Styling */
+        #help-button {
+            background-color: #3a8e3a;
+            color: white;
+            font-size: 1.1rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #help-button:hover {
+            background-color: #2d6a4f;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #2d6a4f;
+            color: white;
+            padding: 10px;
+        }
+
+        /* Hide content when Help is clicked */
+        .hide-content {
+            display: none;
+        }
+
+        /* Icon styling */
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Green Grocer</h1>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./shop.html">Shop</a>
+            <a href="./about.html">About Us</a>
+        </nav>
+    </header>
+
+    <section id="how-it-works">
+        <h2>For Farmers</h2>
+        <p><span class="icon">📋</span><strong>Sign up & create profile</strong>: Register your farm and list your produce.</p>
+        <p><span class="icon">📝</span><strong>List your products</strong>: Add photos, prices, and stock levels.</p>
+        <p><span class="icon">📦</span><strong>Manage orders</strong>: Track orders and arrange deliveries.</p>
+        <p><span class="icon">💳</span><strong>Get paid</strong>: Secure payment for each sale.</p>
+        <p><span class="icon">📈</span><strong>Grow your market</strong>: Expand your reach to local consumers.</p>
+
+        <h2>For Consumers</h2>
+        <p><span class="icon">🛒</span><strong>Browse products</strong>: Discover fresh produce from local farms.</p>
+        <p><span class="icon">📅</span><strong>Place order</strong>: Select and place your order online.</p>
+        <p><span class="icon">🚚</span><strong>Choose delivery</strong>: Pick home delivery or pickup.</p>
+        <p><span class="icon">🍏</span><strong>Enjoy fresh produce</strong>: Get farm-fresh items at your doorstep.</p>
+        <p><span class="icon">🤝</span><strong>Support local farmers</strong>: Help local businesses thrive by shopping with us.</p>
+
+        <!-- Help Button -->
+        <button id="help-button" onclick="toggleInstructions()">Help</button>
+    </section>
+
+    <!-- Instructions Section -->
+    <section id="instructions">
+        <h3>How to Navigate the Website</h3>
+        <p>1. Use the <strong>Home</strong> link to return to the homepage.</p>
+        <p>2. Visit the <strong>Shop</strong> page to explore fresh produce.</p>
+        <p>3. Check out the <strong>About Us</strong> section for more info.</p>
+        <p>4. Visit the <strong>Contact Us</strong> page to reach out to us.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Green Grocer. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to toggle the visibility of the instructions and hide other content
+        function toggleInstructions() {
+            const instructions = document.getElementById('instructions');
+            const helpButton = document.getElementById('help-button');
+            const content = document.querySelector('#how-it-works');
+
+            // Toggle visibility of the instructions section and content
+            if (instructions.style.display === "none" || instructions.style.display === "") {
+                instructions.style.display = "block";
+                content.classList.add("hide-content");
+                helpButton.innerText = "Close Help"; // Change button text to "Close Help"
+            } else {
+                instructions.style.display = "none";
+                content.classList.remove("hide-content");
+                helpButton.innerText = "Help"; // Change button text back to "Help"
+            }
+        }
+    </script>
+</body>
+</html>

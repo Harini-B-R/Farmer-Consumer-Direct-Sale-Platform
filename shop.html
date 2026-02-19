@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add styles for search bar and filters */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://images.pexels.com/photos/1334312/pexels-photo-1334312.jpeg?cs=srgb&dl=pexels-designstrive-1334312.jpg&fm=jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        #categories, #filters {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #categories button, #filters select, #filters input {
+            background-color: #3a8e3a;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #categories button:hover, #filters select:hover, #filters input:hover {
+            background-color: #2d6a4f;
+        }
+
+        #product-list {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .product-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            width: calc(33% - 40px);
+            vertical-align: top;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #2d6a4f;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        #cart-summary {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        #buy-now {
+            background-color: #3a8e3a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #buy-now:hover {
+            background-color: #2d6a4f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Green Grocer</h1>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./about.html">About Us</a>
+        </nav>
+    </header>
+
+    <section id="categories">
+        <button onclick="displayProducts('fruits')">Fruits</button>
+        <button onclick="displayProducts('vegetables')">Vegetables</button>
+        <button onclick="displayProducts('dairy')">Dairy</button>
+        <button onclick="displayProducts('grains')">Grains</button>
+    </section>
+
+    <!-- Filter Section -->
+    <section id="filters">
+        <input type="text" id="search-bar" placeholder="Search products..." oninput="filterProducts()">
+        <select id="price-filter" onchange="filterProducts()">
+            <option value="">Sort by Price</option>
+            <option value="low">Low to High</option>
+            <option value="high">High to Low</option>
+        </select>
+        <select id="popularity-filter" onchange="filterProducts()">
+            <option value="">Sort by Popularity</option>
+            <option value="popular">Most Popular</option>
+        </select>
+    </section>
+
+    <section id="product-list">
+        <h2>Shop Fresh Products</h2>
+        <div id="products"></div>
+    </section>
+
+    <section id="cart-summary" style="display: none;">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <button id="buy-now">Buy Now</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Green Grocer. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const products = {
+            fruits: [
+                { name: 'Pineapple', price: '$3.5/each', img: 'https://nurserynisarga.in/wp-content/uploads/2020/09/istockphoto-524687723-170667a.jpg', popularity: 3 },
+                { name: 'Apple', price: '$2.0/each', img: 'https://cdn.britannica.com/22/187222-050-07B17FB6/apples-on-a-tree-branch.jpg', popularity: 5 },
+                { name: 'Watermelon', price: '$5.0/each', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQp12mKdHlt8zsk7C0sp9KrgXWeW-xZwESNQ&s', popularity: 4 },
+                { name: 'Orange', price: '$1.8/each', img: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/OrangeBloss_wb.jpg', popularity: 4 },
+                { name: 'Mango', price: '$4.0/each', img: 'https://www.padmamnursery.com/cdn/shop/files/MangoTree_Alphonso_Grafted_-Plant.jpg?v=1728317257', popularity: 5 }
+            ],
+            vegetables: [
+                { name: 'Tomato', price: '$1.5/kg', img: 'https://thisismygarden.com/wp-content/uploads/2022/03/Bevaerlodge-Tomato.jpg.webp', popularity: 3 },
+                { name: 'Potato', price: '$1.2/kg', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSslf5WnZhy6gKoF5K8eigxQOr4bsOvVEaBNA&s', popularity: 5 },
+                { name: 'Carrot', price: '$2.0/kg', img: 'https://strapi.myplantin.com/Depositphotos_118413036_L_min_0123b119ba.webp', popularity: 4 },
+                { name: 'Drumstick', price: '$3.0/kg', img: 'https://www.plantsguru.com/image/cache/fruit-plants/pg-drumstick-plant-800x800.jpg', popularity: 4 },
+                { name: 'Onion', price: '$1.5/kg', img: 'https://cdn.shopify.com/s/files/1/0579/7924/0580/files/76326b1997_480x480.jpg?v=1719218667', popularity: 2 }
+            ],
+            dairy: [
+                { name: 'Milk', price: '$1.5/liter', img: 'https://media.istockphoto.com/id/1297005109/photo/close-up-of-raw-milk-being-poured-into-container.jpg?b=1&s=612x612&w=0&k=20&c=Ab1FEt6Ye01HDuzPjL19x528npEYQb3pXbvKgNbt47M=', popularity: 5 }
+            ],
+            grains: [
+                { name: 'Barley', price: '$2.5/kg', img: 'https://www.fitterfly.com/blog/wp-content/uploads/2023/09/is-barley-good-for-diabetes-copy_11zon.webp', popularity: 3 },
+                { name: 'Wheat', price: '$1.8/kg', img: 'https://4.imimg.com/data4/PN/AO/MY-5308089/wheat.jpg', popularity: 4 },
+                { name: 'Rice', price: '$1.5/kg', img: 'https://img.freepik.com/free-photo/white-rice-grains-sack-cloth_144627-13600.jpg', popularity: 5 },
+                { name: 'Corn', price: '$2.5/kg', img: 'https://cdn.britannica.com/36/167236-050-BF90337E/Ears-corn.jpg', popularity: 2 },
+                { name: 'Millet', price: '$4.0/kg', img: 'https://www.renature.co/wp-content/uploads/2024/07/millet.jpeg', popularity: 4 }
+            ]
+        };
+
+        let cart = [];
+        let currentCategory = 'fruits';
+
+        // Function to display products based on selected category
+        function displayProducts(category) {
+            currentCategory = category;
+            const productList = document.getElementById('products');
+            productList.innerHTML = '';
+
+            const selectedProducts = products[category] || [];
+            selectedProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product-item');
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.price}</p>
+                    <button onclick="addToCart('${product.name}', '${product.price}')">Add to Cart</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        // Function to filter products based on search and filters
+        function filterProducts() {
+            const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+            const priceFilter = document.getElementById('price-filter').value;
+            const popularityFilter = document.getElementById('popularity-filter').value;
+
+            let filteredProducts = products[currentCategory] || [];
+            
+            // Search filter
+            filteredProducts = filteredProducts.filter(product =>
+                product.name.toLowerCase().includes(searchTerm)
+            );
+
+            // Price filter
+            if (priceFilter === 'low') {
+                filteredProducts = filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            } else if (priceFilter === 'high') {
+                filteredProducts = filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            }
+
+            // Popularity filter
+            if (popularityFilter === 'popular') {
+                filteredProducts = filteredProducts.sort((a, b) => b.popularity - a.popularity);
+            }
+
+            // Update displayed products
+            const productList = document.getElementById('products');
+            productList.innerHTML = '';
+            filteredProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product-item');
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.price}</p>
+                    <button onclick="addToCart('${product.name}', '${product.price}')">Add to Cart</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        function addToCart(productName, productPrice) {
+            const quantity = prompt(`Enter the quantity for ${productName}:`);
+            if (!quantity || isNaN(quantity) || quantity <= 0) {
+                alert('Please enter a valid quantity!');
+                return;
+            }
+
+            const existingProduct = cart.find(item => item.name === productName);
+            if (existingProduct) {
+                existingProduct.quantity += parseInt(quantity, 10);
+            } else {
+                cart.push({
+                    name: productName,
+                    price: parseFloat(productPrice.replace('$', '')),
+                    quantity: parseInt(quantity, 10)
+                });
+            }
+
+            updateCartSummary();
+        }
+
+        function updateCartSummary() {
+            const cartSummary = document.getElementById('cart-summary');
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartSummary.style.display = 'none';
+                return;
+            }
+
+            cartSummary.style.display = 'block';
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `
+                    <p><strong>${item.name}</strong>: ${item.quantity} x $${item.price.toFixed(2)} = $${(item.price * item.quantity).toFixed(2)}</p>
+                `;
+                cartItems.appendChild(itemDiv);
+            });
+
+            const totalDiv = document.createElement('div');
+            totalDiv.innerHTML = `<p><strong>Total:</strong> $${totalPrice.toFixed(2)}</p>`;
+            cartItems.appendChild(totalDiv);
+
+            document.getElementById('buy-now').onclick = () => {
+                window.location.href = `contact.html?cart=${encodeURIComponent(JSON.stringify(cart))}`;
+            };
+        }
+
+        displayProducts('fruits'); // Default category
+    </script>
+</body>
+</html>

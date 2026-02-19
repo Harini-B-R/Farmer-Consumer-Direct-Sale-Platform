@@ -1,0 +1,195 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background-color: #3a8e3a;
+    color: white;
+    text-align: center;
+    padding: 1.5em 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ffd700; /* Gold color on hover */
+}
+
+#banner {
+    background-image: url('banner-image.jpg'); /* Replace with a banner image URL */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+#banner h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+#banner button {
+    background-color: #ffd700;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: #3a8e3a;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#banner button:hover {
+    background-color: #3a8e3a;
+    color: white;
+}
+
+#categories {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.category-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 20%;
+    transition: transform 0.3s;
+}
+
+.category-item:hover {
+    transform: scale(1.05);
+}
+
+/* Add hover effect for category items */
+.category-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    display: inline-block;
+    width: 45%;
+    box-sizing: border-box;
+    text-align: left;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect on category items */
+.category-item:hover {
+    background-color: rgba(255, 255, 255, 1); /* Slightly more opaque background */
+    transform: translateY(-5px); /* Slight lift effect */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+/* Hover effect on category item headings */
+.category-item h1 {
+    color: #2d6a4f;
+    transition: color 0.3s ease; /* Smooth transition for text color */
+}
+
+.category-item:hover h1 {
+    color: #ff8c00; /* Change heading color on hover */
+}
+/* Styling the list items in category items */
+/* Styling the list items in category items */
+.category-item ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual category list item */
+.category-item ul li {
+    color: #333;
+    font-size: 1.1em;
+    padding: 10px;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color */
+}
+
+/* Hover effect for list items */
+.category-item ul li:hover {
+    background-color: #2d6a4f; /* Green background on hover */
+    color: white; /* White text color on hover */
+}
+
+/* Tooltip styling for description and rating */
+.category-list-item::after {
+    content: attr(data-description) " | Rating: " attr(data-rating); /* Concatenate description and rating */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+/* Show tooltip when hovering */
+.category-item ul li:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Show the description with a slight lift */
+}
+
+
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #3a8e3a;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+h2, h3 {
+    color: #3a8e3a;
+}
+
+.product-item, .farmer-profile {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.product-item h3 {
+    margin: 10px 0;
+}
+
+button {
+    background-color: #3a8e3a;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2a6b2a;
+}

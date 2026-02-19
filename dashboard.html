@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Grocer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.pexels.com/photos/1334312/pexels-photo-1334312.jpeg?cs=srgb&dl=pexels-designstrive-1334312.jpg&fm=jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #000000;
+        }
+        /* Sidebar styles */
+        .sidebar {
+            width: 0;
+            height: 100vh;
+            background-color: #2e7d32;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            color: #000000;
+            padding-top: 20px;
+            overflow-x: hidden;
+            transition: 0.5s;
+        }
+        .sidebar h2 {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #1b5e20;
+        }
+        /* Open the sidebar */
+        .sidebar.open {
+            width: 200px;
+        }
+        .sidebar a {
+            color: #000000;
+        }
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.5s;
+        }
+        /* Show content when sidebar is open */
+        .main-content.open {
+            margin-left: 200px;
+        }
+        .header {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+        }
+        .header h2 {
+            color: #2e7d32;
+            margin: 0;
+        }
+        .main-title {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .content-section {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .content-section h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2e7d32;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #1b5e20;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            padding: 10px 20px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #1b5e20;
+        }
+        #addProductForm {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #2e7d32;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-title">Green Grocer</div>
+
+<div class="sidebar" id="sidebar">
+    <h2>Farmer Dashboard</h2>
+    <a href="./index.html">Home</a>
+    <a href="#profile">Profile</a>
+    <a href="#products">My Products</a>
+    <a href="#orders">Orders</a>
+    <a href="#settings">Settings</a>
+    <a href="./index.html">Logout</a>
+    <a href="#" onclick="confirmDelete()">Delete Account</a>
+    <a href="javascript:void(0);" onclick="toggleAddProductForm()">Add New Product</a>
+</div>
+
+<div class="main-content" id="mainContent">
+    <div class="header">
+        <h2>Welcome, Farmer!</h2>
+        <span class="btn" onclick="toggleSidebar()">☰ Open Sidebar</span>
+    </div>
+
+    <!-- Farmer Orders Section -->
+    <div class="content-section" id="farmer-orders">
+        <h3>Incoming Orders</h3>
+        <p>Track the orders placed by consumers:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="incoming-orders">
+                <!-- Orders will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Consumer Dashboard -->
+    <div class="content-section" id="consumer-orders">
+        <h3>My Orders</h3>
+        <p>You have X orders placed. View the details below:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="order-history">
+                <!-- Orders will be dynamically added here -->
+            </tbody>
+        </table>
+        <a href="#" class="btn">Track Orders</a>
+    </div>
+
+    <!-- Cart History Section -->
+    <div class="content-section" id="cart-history">
+        <h3>Cart History</h3>
+        <p>Here’s a list of items you’ve added to your cart in the past.</p>
+        <ul id="cart-history-list">
+            <!-- Cart items will be listed here -->
+        </ul>
+    </div>
+
+    <!-- Wishlist Section -->
+    <div class="content-section" id="wishlist">
+        <h3>My Wishlist</h3>
+        <p>These are the items you've saved for later purchase.</p>
+        <ul id="wishlist-list">
+            <!-- Wishlist items will be listed here -->
+        </ul>
+    </div>
+
+    <!-- Add Product Form (Initially Hidden) -->
+    <div class="content-section" id="addProductForm">
+        <h3>Add New Product</h3>
+        <form action="#" method="POST">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" name="productName" required>
+
+            <label for="productDescription">Product Description</label>
+            <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
+
+            <label for="productPrice">Product Price (₹)</label>
+            <input type="number" id="productPrice" name="productPrice" required>
+
+            <label for="productImage">Product Image URL</label>
+            <input type="url" id="productImage" name="productImage" required>
+
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleSidebar() {
+        var sidebar = document.getElementById("sidebar");
+        var mainContent = document.getElementById("mainContent");
+        sidebar.classList.toggle("open");
+        mainContent.classList.toggle("open");
+    }
+
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+            window.location.href = "index.html";
+        }
+    }
+
+    function toggleAddProductForm() {
+        var form = document.getElementById("addProductForm");
+        if (form.style.display === "none" || form.style.display === "") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+
+    // Example Data (These would come from your database or API)
+    const consumerOrders = [
+        { orderId: '123', date: '2024-12-15', status: 'Shipped', total: '$50.00' },
+        { orderId: '124', date: '2024-12-16', status: 'Delivered', total: '$30.00' }
+    ];
+
+    const cartHistory = [
+        { productName: 'Tomato', quantity: 2, price: '$1.5/kg' },
+        { productName: 'Mango', quantity: 1, price: '$4.0/each' }
+    ];
+
+    const wishlist = [
+        { productName: 'Potato', price: '$1.2/kg' },
+        { productName: 'Orange', price: '$1.8/each' }
+    ];
+
+    const farmerOrders = [
+        { orderId: '123', customerName: 'John Doe', status: 'Processing', total: '$50.00' },
+        { orderId: '124', customerName: 'Jane Smith', status: 'Shipped', total: '$30.00' }
+    ];
+
+    // Function to populate order history
+    function populateOrderHistory() {
+        const orderHistoryElement = document.getElementById('order-history');
+        consumerOrders.forEach(order => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${order.orderId}</td>
+                <td>${order.date}</td>
+                <td>${order.status}</td>
+                <td>${order.total}</td>
+            `;
+            orderHistoryElement.appendChild(row);
+        });
+    }
+
+    // Function to populate cart history
+    function populateCartHistory() {
+        const cartHistoryElement = document.getElementById('cart-history-list');
+        cartHistory.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${item.productName} - ${item.quantity} x ${item.price}`;
+            cartHistoryElement.appendChild(listItem);
+        });
+    }
+
+    // Function to populate wishlist
+    function populateWishlist() {
+        const wishlistElement = document.getElementById('wishlist-list');
+        wishlist.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${item.productName} - ${item.price}`;
+            wishlistElement.appendChild(listItem);
+        });
+    }
+
+    // Function to populate incoming orders
+    function populateIncomingOrders() {
+        const incomingOrdersElement = document.getElementById('incoming-orders');
+        farmerOrders.forEach(order => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${order.orderId}</td>
+                <td>${order.customerName}</td>
+                <td>${order.status}</td>
+                <td>${order.total}</td>
+            `;
+            incomingOrdersElement.appendChild(row);
+        });
+    }
+
+    populateOrderHistory();
+    populateCartHistory();
+    populateWishlist();
+    populateIncomingOrders();
+</script>
+
+</body>
+</html>
